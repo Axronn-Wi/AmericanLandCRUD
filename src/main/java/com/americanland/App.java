@@ -1,34 +1,43 @@
 package com.americanland;
 
-import com.americanland.dao.RolDAO;
-import com.americanland.modelo.Rol;
+import com.americanland.dao.UsuarioDAO;
+import com.americanland.modelo.Usuario;
+import java.time.LocalDate;
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("=== Iniciando Aplicación American Land ===");
+        System.out.println("=== INICIANDO PRUEBA DEL MÓDULO DE USUARIOS ===");
 
-        // 1. Instanciamos el DAO (el que maneja la base de datos)
-        RolDAO rolDao = new RolDAO();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-        // 2. Creamos un nuevo objeto Rol de prueba con datos para American Land
-        Rol nuevoRol = new Rol();
-        nuevoRol.setNombreRol("Teacher"); 
-        nuevoRol.setDescripcion("Docente encargado de las clases de inglés de American Land");
+        // 1. CREAR UN USUARIO DE PRUEBA
+        // Nota: Usamos idRol = 1 (Asegúrate de que el id_rol 1 exista en tu tabla roles, ej: Admin)
+        Usuario nuevoUsuario = new Usuario(
+            1, 
+            "Aaron Cabrera Test", 
+            "aaron.test@americanland.com", 
+            "password_encriptado_123", 
+            LocalDate.of(2000, 5, 15), 
+            "Colombia", 
+            "Bogotá", 
+            true
+        );
 
-        System.out.println("Intentando registrar el rol: " + nuevoRol.getNombreRol());
+        System.out.println("Intentando registrar a: " + nuevoUsuario.getNombreCompleto() + " en la nube...");
+        boolean insertado = usuarioDAO.crearUsuario(nuevoUsuario);
 
-        // 3. Ejecutamos tu método real: crearRol
-        try {
-            rolDao.crearRol(nuevoRol); 
-            System.out.println("¡Proceso terminado!");
-            
-            // 4. Aprovechemos para listar los roles que hay en la base de datos
-            System.out.println("\n=== Lista Actual de Roles ===");
-            rolDao.listarRoles();
-            
-        } catch (Exception e) {
-            System.out.println("Upps... Algo falló en la ejecución principal.");
-            e.printStackTrace();
+        if (insertado) {
+            System.out.println("✅ ¡Usuario creado con éxito en TiDB Cloud!");
+        } else {
+            System.out.println("❌ No se pudo crear el usuario. Revisa la consola para ver el error.");
+        }
+
+        System.out.println("\n=== LISTADO ACTUAL DE USUARIOS EN LA BASE DE DATO ===");
+        // 2. LISTAR LOS USUARIOS PARA VERIFICAR
+        List<Usuario> usuarios = usuarioDAO.listarUsuarios();
+        for (Usuario u : usuarios) {
+            System.out.println("ID: " + u.getId() + " | Nombre: " + u.getNombreCompleto() + " | Correo: " + u.getCorreo() + " | Estado: " + (u.isActivo() ? "Activo" : "Inactivo"));
         }
     }
 }
