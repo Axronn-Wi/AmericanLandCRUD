@@ -34,22 +34,22 @@
 
                     <div class="col-md-4">
                         <label class="form-label">Nombre Completo</label>
-                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Aaron Cabrera" 
+                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Carlos Mendoza" 
                                value="${usuarioEditar != null ? usuarioEditar.nombreCompleto : ''}" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Correo Electrónico</label>
-                        <input type="email" name="correo" class="form-control" placeholder="aaron@email.com" 
+                        <input type="email" name="correo" class="form-control" placeholder="ejemplo@americanland.com" 
                                value="${usuarioEditar != null ? usuarioEditar.correo : ''}" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Contraseña</label>
-                        <input type="password" name="password" class="form-control" 
+                        <input type="password" name="password" class="form-control" placeholder="••••••••"
                                value="${usuarioEditar != null ? usuarioEditar.contrasenaHash : ''}" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">ID Rol</label>
-                        <input type="number" name="id_rol" class="form-control" 
+                        <input type="number" name="id_rol" class="form-control" placeholder="Ej: 1" 
                                value="${usuarioEditar != null ? usuarioEditar.idRol : '1'}" required>
                     </div>
                     <div class="col-md-3">
@@ -59,12 +59,12 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">País</label>
-                        <input type="text" name="pais" class="form-control" 
+                        <input type="text" name="pais" class="form-control" placeholder="Ej: México" 
                                value="${usuarioEditar != null ? usuarioEditar.pais : 'Colombia'}" required>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Ciudad</label>
-                        <input type="text" name="ciudad" class="form-control" 
+                        <input type="text" name="ciudad" class="form-control" placeholder="Ej: Medellín" 
                                value="${usuarioEditar != null ? usuarioEditar.ciudad : 'Bogotá'}" required>
                     </div>
                     <div class="col-12 text-end">
