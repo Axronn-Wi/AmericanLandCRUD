@@ -1,4 +1,7 @@
 /Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/App.java
 /Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/conexion/ConexionBD.java
+/Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/controlador/UsuarioServlet.java
 /Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/dao/RolDAO.java
+/Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/dao/UsuarioDAO.java
 /Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/modelo/Rol.java
+/Users/aaroncabrera/Documents/AmericanLandCRUD/src/main/java/com/americanland/modelo/Usuario.java

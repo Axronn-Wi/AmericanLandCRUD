@@ -75,4 +75,69 @@ public class UsuarioDAO {
         }
         return lista;
     }
+// 3. DELETE: Eliminar un usuario por su ID
+    public boolean eliminarUsuario(int id) {
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        try (Connection conn = ConexionBD.obtenerConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar usuario: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // 4. READ ONE: Obtener un solo usuario por su ID (Para cargar al editar)
+    public Usuario obtenerUsuarioPorId(int id) {
+        String sql = "SELECT * FROM usuarios WHERE id = ?";
+        try (Connection conn = ConexionBD.obtenerConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Usuario u = new Usuario();
+                    u.setId(rs.getInt("id"));
+                    u.setIdRol(rs.getInt("id_rol"));
+                    u.setNombreCompleto(rs.getString("nombre_completo"));
+                    u.setCorreo(rs.getString("correo"));
+                    u.setContrasenaHash(rs.getString("contraseña_hash"));
+                    if (rs.getDate("fecha_nacimiento") != null) {
+                        u.setFechaNacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
+                    }
+                    u.setPais(rs.getString("pais"));
+                    u.setCiudad(rs.getString("ciudad"));
+                    u.setActivo(rs.getBoolean("activo"));
+                    return u;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener usuario: " + e.getMessage());
+        }
+        return null;
+    }
+
+    // 5. UPDATE: Modificar los datos de un usuario existente
+    public boolean actualizarUsuario(Usuario usuario) {
+        String sql = "UPDATE usuarios SET id_rol = ?, nombre_completo = ?, correo = ?, contraseña_hash = ?, fecha_nacimiento = ?, pais = ?, ciudad = ? WHERE id = ?";
+        try (Connection conn = ConexionBD.obtenerConexion(); 
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
+            ps.setInt(1, usuario.getIdRol());
+            ps.setString(2, usuario.getNombreCompleto());
+            ps.setString(3, usuario.getCorreo());
+            ps.setString(4, usuario.getContrasenaHash());
+            ps.setDate(5, Date.valueOf(usuario.getFechaNacimiento()));
+            ps.setString(6, usuario.getPais());
+            ps.setString(7, usuario.getCiudad());
+            ps.setInt(8, usuario.getId());
+            
+            int filasAfectadas = ps.executeUpdate();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar usuario: " + e.getMessage());
+            return false;
+        }
+    }
 }

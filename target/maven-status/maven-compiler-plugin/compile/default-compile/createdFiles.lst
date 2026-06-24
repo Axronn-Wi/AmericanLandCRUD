@@ -1,4 +1,7 @@
 com/americanland/modelo/Rol.class
-com/americanland/App.class
+com/americanland/modelo/Usuario.class
 com/americanland/dao/RolDAO.class
+com/americanland/dao/UsuarioDAO.class
+com/americanland/controlador/UsuarioServlet.class
+com/americanland/App.class
 com/americanland/conexion/ConexionBD.class
